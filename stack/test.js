@@ -1,3 +1,6 @@
+var should = require("chai").should()
+var Node = require("../stack.es5").Node;
+
 var stack = new Stack();
 stack.push(1);
 stack.push(2);

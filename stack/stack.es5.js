@@ -46,4 +46,7 @@ Stack.prototype.traverse = function(fn) {
    fn(current);
    current = current.next;
   }
-}
+};
+
+module.exports.Node = Node;
+module.exports.Stack = Stack;
