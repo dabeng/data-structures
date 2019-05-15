@@ -1,0 +1,23 @@
+{
+  "name": "data-structures",
+  "version": "1.0.0",
+  "description": "JavaScipt implementation of data structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha binarysearchtree/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabeng/data-structures.git"
+  },
+  "author": "dabeng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dabeng/data-structures/issues"
+  },
+  "homepage": "https://github.com/dabeng/data-structures#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4"
+  }
+}

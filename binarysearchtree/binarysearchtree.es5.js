@@ -1,5 +1,5 @@
 function Node (val) {
-  this.val = val;
+  this.val = val || null;
   this.left = null;
   this.right = null;
 }
@@ -62,7 +62,7 @@ BinarySearchTree.prototype.postOrder = function (node, fn) {
  * Traverses  binary tree in level order. 
  * 
  */
-BinarySearchTree.prototype.levelOrder = function () {
+BinarySearchTree.prototype.levelOrder = function (fn) {
   if (this.root === null) {
     return;
   }
@@ -71,7 +71,7 @@ BinarySearchTree.prototype.levelOrder = function () {
   while (queue.length) {
     var node = queue.shift();
     // pirnt/explore node.
-    console.log(node.val);
+    if (fn) fn(node);
     // enqueue left
     if (node.left) {
       queue.push(node.left);
@@ -99,9 +99,9 @@ BinarySearchTree.prototype.remove = function (val) {
     this.root = null;
     return;
   }
-  const queue = [this.root];
+  var queue = [this.root];
   while (queue.length) {
-    const node = queue.shift();
+    var node = queue.shift();
     
     // If target is on left of parent.
     if (node.left && node.left.val === val) {
@@ -135,3 +135,6 @@ BinarySearchTree.prototype.getMax = function () {
  }
  return current.val;
 };
+
+module.exports.Node = Node;
+module.exports.BinarySearchTree = BinarySearchTree;

@@ -48,12 +48,12 @@ LinkedList.prototype.insert = function (index, val) {
       node.next = this.head;
       this.head = node;
     } else if (index >= this._length) {
-      var tail = this.get(this._length-1);
+      var tail = this.get(this._length - 1);
       tail.next = node;
     } else {
-      var current = this.get(index-1);
-      node.next = current.next;
-      current.next = node;
+      var temp = this.get(index - 1);
+      node.next = temp.next;
+      temp.next = node;
     }
   }
   this._length++;

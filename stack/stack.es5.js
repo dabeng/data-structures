@@ -21,7 +21,7 @@ Stack.prototype.pop = function () {
   if( this.top ) {
     var temp = this.top;
     this.top = this.top.next;
-    return temp.val;
+    return temp;
   } else {
     console.log('Stack is empty!');
     return null;
@@ -31,8 +31,9 @@ Stack.prototype.pop = function () {
 Stack.prototype.reverse = function () {
   var prev = null;
   var current = this.top;
+  var next;
   while(current) {
-    var next = current.next;
+    next = current.next;
     current.next = prev;
     prev = current;
     current = next;
