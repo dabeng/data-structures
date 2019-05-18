@@ -3,10 +3,11 @@
  */
 function Node (val) {
   this.val = val || null;
+  this.prev = null; // New line
   this.next = null;
 }
 
-function LinkedList () {
+function DoublyLinkedList () {
   this.head = null;
   this._length = 0;
 }
@@ -16,7 +17,7 @@ function LinkedList () {
  * @param {number} index
  * @return {node}
  */
-LinkedList.prototype.get = function (index) {
+DoublyLinkedList.prototype.get = function (index) {
   if (index < 0 || index > this._length - 1) {
     return -1;
   }
@@ -36,24 +37,29 @@ LinkedList.prototype.get = function (index) {
  * @return {void}
  * index === -1 增加头节点；index === length 增加尾节点
  */
-LinkedList.prototype.insert = function (index, val) {
+DoublyLinkedList.prototype.insert = function (index, val) {
   if (index < -1 || index > this._length) {
     return;
   }
+
   var node = new Node(val);
   if (!this._length) {
     this.head = node;
   } else {
     if (index <= 0) {
       node.next = this.head;
+      this.head.prev = node; // New line
       this.head = node;
     } else if (index >= this._length) {
-      var tail = this.get(this._length - 1);
+      var tail = this.get(this._length-1);
       tail.next = node;
+      node.prev = tail; // New line
     } else {
-      var temp = this.get(index - 1);
-      node.next = temp.next;
-      temp.next = node;
+      var current = this.get(index-1);
+      node.next = current.next;
+      current.next.prev = node; // New line
+      current.next = node;
+      node.prev = current; // New line
     }
   }
   this._length++;
@@ -65,7 +71,7 @@ LinkedList.prototype.insert = function (index, val) {
  * @return {void}
  * 索引值在0~length-1之间的才有效
  */
-LinkedList.prototype.remove = function (index) {
+DoublyLinkedList.prototype.remove = function (index) {
   if (index < 0 || index > this._length - 1) {
     return;
   }
@@ -74,12 +80,14 @@ LinkedList.prototype.remove = function (index) {
       this.head = null
     } else {
       this.head = this.head.next;
+      this.head.prev = null; // New line
     }
   } else if (index === this._length - 1) {
     this.get(index-1).next = null;
   } else {
     var target = this.get(index-1);
     target.next = target.next.next;
+    target.next.prev = target; // New line
   }
   this._length--;
 };
@@ -89,7 +97,7 @@ LinkedList.prototype.remove = function (index) {
  * @param {*} val
  * @return {void}
  */
-LinkedList.prototype.prepend = function (val) {
+DoublyLinkedList.prototype.prepend = function (val) {
   this.insert(0, val);
 };
 
@@ -98,20 +106,37 @@ LinkedList.prototype.prepend = function (val) {
  * @param {number} val
  * @return {void}
  */
-LinkedList.prototype.append = function (val) {
+DoublyLinkedList.prototype.append = function (val) {
   this.insert(this._length, val);
 };
 
-LinkedList.prototype.reverse = function() {
+DoublyLinkedList.prototype.traverse = function (fn) {
+   var currNode = this.head;
+   while (currNode) {
+      fn(currNode);
+      currNode = currNode.next !== this.head ? currNode.next : false;
+   }
+};
+
+DoublyLinkedList.prototype.reverse = function() {
    var prev = null;
    var current = this.head;
    var next;
    while(current) {
      next = current.next;
      current.next = prev;
+     current.prev = next; // New line
      prev = current;
      current = next;
    }
 
   this.head = prev;
 };
+
+var linkedList = new DoublyLinkedList();
+linkedList.remove(0);
+linkedList.prepend(1);
+linkedList.append(3);
+linkedList.insert(1,2);
+linkedList.reverse();
+linkedList.traverse(function(node) {console.log(node.val)});
