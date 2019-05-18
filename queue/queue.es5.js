@@ -10,7 +10,7 @@ function Queue () {
 
 Queue.prototype.enqueue = function (val) {
    var node = new Node(val);
-   if(!this.head) {
+   if (!this.head) {
      this.head = node;
      this.tail = node;
    } else {
@@ -20,13 +20,13 @@ Queue.prototype.enqueue = function (val) {
 };
 
 Queue.prototype.dequeue = function () {
-  if(!this.head) {
-   console.log('No item');
-   return null;
+  if (!this.head) {
+    console.log('No item');
+    return null;
   } else {
-   var temp = this.head;
-   this.head = this.head.next;
-   return temp;
+    var temp = this.head;
+    this.head = this.head.next;
+    return temp;
   }
 };
 
@@ -34,7 +34,7 @@ Queue.prototype.reverse = function () {
   var prev = null;
   var current = this.head;
   var next;
-  while(current) {
+  while (current) {
     next = current.next;
     current.next = prev;
     prev = current;
@@ -43,11 +43,11 @@ Queue.prototype.reverse = function () {
   this.head = prev;
 };
 
-Queue.prototype.traverse = function(fn) {
+Queue.prototype.traverse = function (fn) {
   var current = this.head;
-  while(current) {
-   fn(current);
-   current = current.next;
+  while (current) {
+    fn(current);
+    current = current.next;
   }
 };
 

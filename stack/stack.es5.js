@@ -10,10 +10,10 @@ function Stack () {
 Stack.prototype.push = function (val) {
    var node = new Node(val);
    if(this.top) {
-     node.next = this.top
-     this.top = node
+     node.next = this.top;
+     this.top = node;
    } else {
-     this.top = node
+     this.top = node;
    }
 };
 
