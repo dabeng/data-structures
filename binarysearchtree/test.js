@@ -18,7 +18,7 @@ bst.insert(4);
 // bst.insertInLevelOrder(4);
 
 // bst.remove(2);
-bst.levelOrder();
+// bst.levelOrder();
 // console.log(bst.getMax());
 // console.log(bst.getMin());
 // bst.preOrder(bst.root, function(node) { console.log(node.val)});

@@ -34,55 +34,6 @@ BinarySearchTree.prototype.insert = function (val) {
   }
 };
 
-BinarySearchTree.prototype.inOrder = function (node, fn) {
- if(node){
-   this.inOrder(node.left, fn);
-   if(fn) fn(node);
-   this.inOrder(node.right, fn);
- }
-};
-
-BinarySearchTree.prototype.preOrder = function (node, fn) {
- if (node) {
-   if (fn) fn(node);
-   this.preOrder(node.left, fn);
-   this.preOrder(node.right, fn);
- }
-};
-
-BinarySearchTree.prototype.postOrder = function (node, fn) {
- if (node) {
-   this.postOrder(node.left, fn);
-   this.postOrder(node.right, fn);
-   if(fn) fn(node);
- }
-};
-
-/**
- * Traverses  binary tree in level order. 
- * 
- */
-BinarySearchTree.prototype.levelOrder = function (fn) {
-  if (this.root === null) {
-    return;
-  }
-  
-  var queue = [this.root];
-  while (queue.length) {
-    var node = queue.shift();
-    // pirnt/explore node.
-    if (fn) fn(node);
-    // enqueue left
-    if (node.left) {
-      queue.push(node.left);
-    }
-    // enqueue right.
-    if (node.right) {
-      queue.push(node.right);
-    }
-  }
-};
-
 /**
  * Removes a node and it's subtrees from a 
  * binary tree.
@@ -121,19 +72,69 @@ BinarySearchTree.prototype.remove = function (val) {
   }
 };
 
-BinarySearchTree.prototype.getMin = function () {
- var current = this.root;
- while(current.left) {
- current = current.left;
+BinarySearchTree.prototype.preOrder = function (node, fn) {
+ if (node) {
+   if (fn) fn(node);
+   this.preOrder(node.left, fn);
+   this.preOrder(node.right, fn);
  }
- return current.val;
 };
-BinarySearchTree.prototype.getMax = function () {
- var current = this.root;
- while(current.right) {
- current = current.right;
+
+BinarySearchTree.prototype.inOrder = function (node, fn) {
+ if(node){
+   this.inOrder(node.left, fn);
+   if(fn) fn(node);
+   this.inOrder(node.right, fn);
  }
- return current.val;
+};
+
+BinarySearchTree.prototype.postOrder = function (node, fn) {
+ if (node) {
+   this.postOrder(node.left, fn);
+   this.postOrder(node.right, fn);
+   if(fn) fn(node);
+ }
+};
+
+/**
+ * Traverses  binary tree in level order. 
+ * 
+ */
+BinarySearchTree.prototype.levelOrder = function (fn) {
+  if (this.root === null) {
+    return;
+  }
+  
+  var queue = [this.root];
+  while (queue.length) {
+    var node = queue.shift();
+    // pirnt/explore node.
+    if (fn) fn(node);
+    // enqueue left
+    if (node.left) {
+      queue.push(node.left);
+    }
+    // enqueue right.
+    if (node.right) {
+      queue.push(node.right);
+    }
+  }
+};
+
+BinarySearchTree.prototype.getMin = function () {
+  var current = this.root;
+  while(current.left) {
+    current = current.left;
+  }
+  return current.val;
+};
+
+BinarySearchTree.prototype.getMax = function () {
+  var current = this.root;
+  while(current.right) {
+    current = current.right;
+  }
+  return current.val;
 };
 
 module.exports.Node = Node;
